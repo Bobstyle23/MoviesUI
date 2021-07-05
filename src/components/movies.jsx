@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import MovieIcon from "@material-ui/icons/Movie";
+import Likes from "./common/likes";
 
 class Movies extends Component {
   state = {
@@ -10,6 +11,14 @@ class Movies extends Component {
 
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
+    this.setState({ movies });
+  };
+
+  handleLike = (movie) => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movies[index] };
+    movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   };
   render() {
@@ -33,6 +42,7 @@ class Movies extends Component {
               <th>Genre</th>
               <th>Stock</th>
               <th>Rate</th>
+              <th>Like</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -45,8 +55,16 @@ class Movies extends Component {
                 <td>{movie.dailyRentalRate}</td>
                 <td>
                   <button
+                    onClick={() => this.handleLike(movie)}
+                    className="btn btn-light"
+                  >
+                    <Likes liked={movie.liked} />
+                  </button>
+                </td>
+                <td>
+                  <button
                     onClick={() => this.handleDelete(movie)}
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger btn-sm m-2"
                   >
                     <DeleteSweepIcon />
                   </button>
