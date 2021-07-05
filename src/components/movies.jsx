@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
-import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import MovieIcon from "@material-ui/icons/Movie";
 import Likes from "./common/likes";
+import Dislike from "./common/dislike";
+import Pagination from "./common/pagination";
+import Delete from "./common/delete";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageSize: 10,
   };
 
   handleDelete = (movie) => {
@@ -20,6 +23,18 @@ class Movies extends Component {
     movies[index] = { ...movies[index] };
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
+  };
+
+  handleDislike = (movie) => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movies[index] };
+    movies[index].disliked = !movies[index].disliked;
+    this.setState({ movies });
+  };
+
+  handleOnPageChange = (page) => {
+    console.log(page);
   };
   render() {
     const { length: count } = this.state.movies;
@@ -43,6 +58,7 @@ class Movies extends Component {
               <th>Stock</th>
               <th>Rate</th>
               <th>Like</th>
+              <th>Dislike</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -63,16 +79,29 @@ class Movies extends Component {
                 </td>
                 <td>
                   <button
+                    onClick={() => this.handleDislike(movie)}
+                    className="btn btn-light"
+                  >
+                    <Dislike disliked={movie.disliked} />
+                  </button>
+                </td>
+                <td>
+                  <button
                     onClick={() => this.handleDelete(movie)}
                     className="btn btn-danger btn-sm m-2"
                   >
-                    <DeleteSweepIcon />
+                    <Delete deleted={movie.deleted} />
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemsCount={count}
+          pageSize={this.state.pageSize}
+          onPageChange={this.handleOnPageChange}
+        />
       </React.Fragment>
     );
   }

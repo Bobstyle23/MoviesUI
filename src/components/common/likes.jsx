@@ -8,7 +8,7 @@ class Likes extends Component {
     return (
       <i
         onClick={this.props.onClick}
-        style={({ cursor: "pointer" }, { outline: "none" }, { border: "none" })}
+        style={({ cursor: "pointer" }, { outline: "none" })}
         className={classes}
         aria-hidden="true"
       />
