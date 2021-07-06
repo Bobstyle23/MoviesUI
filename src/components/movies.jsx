@@ -10,7 +10,7 @@ import { paginate } from "./utils/paginate";
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 2,
+    pageSize: 3,
     currentPage: 1,
   };
 
@@ -40,15 +40,15 @@ class Movies extends Component {
   };
   render() {
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, movies } = this.state;
-    if (count === 0) {
-      const movies = paginate(movies, currentPage, pageSize);
+    const { pageSize, currentPage, movies: allMovies } = this.state;
+    if (count === 0)
       return (
         <p>
           There are no <MovieIcon /> movies in the database!
         </p>
       );
-    }
+    const movies = paginate(allMovies, currentPage, pageSize);
+
     return (
       <React.Fragment>
         <p>
