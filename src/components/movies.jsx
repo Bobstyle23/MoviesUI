@@ -5,11 +5,13 @@ import Likes from "./common/likes";
 import Dislike from "./common/dislike";
 import Pagination from "./common/pagination";
 import Delete from "./common/delete";
+import { paginate } from "./utils/paginate";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 10,
+    pageSize: 2,
+    currentPage: 1,
   };
 
   handleDelete = (movie) => {
@@ -34,11 +36,13 @@ class Movies extends Component {
   };
 
   handleOnPageChange = (page) => {
-    console.log(page);
+    this.setState({ currentPage: page });
   };
   render() {
     const { length: count } = this.state.movies;
+    const { pageSize, currentPage, movies } = this.state;
     if (count === 0) {
+      const movies = paginate(movies, currentPage, pageSize);
       return (
         <p>
           There are no <MovieIcon /> movies in the database!
@@ -63,7 +67,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((movie) => (
+            {movies.map((movie) => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
@@ -99,7 +103,8 @@ class Movies extends Component {
         </table>
         <Pagination
           itemsCount={count}
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
+          currentPage={currentPage}
           onPageChange={this.handleOnPageChange}
         />
       </React.Fragment>
