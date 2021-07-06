@@ -12,6 +12,8 @@ class MoviesTable extends Component {
     { path: "dailyRentalRate", label: "Rate" },
     {
       key: "like",
+      path: "like",
+      label: "Like",
       content: (movie) => (
         <button
           onClick={() => this.props.onLike(movie)}
@@ -23,6 +25,8 @@ class MoviesTable extends Component {
     },
     {
       key: "dislike",
+      path: "dislike",
+      label: "Dislike",
       content: (movie) => (
         <button
           onClick={() => this.props.onDislike(movie)}
@@ -34,6 +38,8 @@ class MoviesTable extends Component {
     },
     {
       key: "delete",
+      path: "delete",
+      label: "Delete",
       content: (movie) => (
         <button
           onClick={() => this.props.onDelete(movie)}
