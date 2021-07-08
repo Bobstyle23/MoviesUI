@@ -8,6 +8,7 @@ import Rentals from "./components/rentals";
 import NavBar from "./components/navBar";
 import LoginForm from "./components/loginForm";
 import Register from "./components/registerForm";
+
 import "./index.css";
 
 function App() {
