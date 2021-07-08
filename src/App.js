@@ -31,8 +31,6 @@ function App() {
           <Redirect from="/" exact to="/movies" />
           <Redirect to="/notfound" />
         </Switch>
-
-        {/* <Movies /> */}
       </main>
     </div>
   );
