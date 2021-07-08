@@ -37,7 +37,11 @@ function NavBar() {
                   Rentals
                 </NavLink>
               </li>
-              <li className="nav-item"></li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/loginForm">
+                  Login
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
