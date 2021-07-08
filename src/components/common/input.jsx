@@ -1,5 +1,6 @@
 import React from "react";
 
+//object desctruction to reduce code repetition
 function Input({ name, label, value, onChange, type, error }) {
   return (
     <div className="form-group">
