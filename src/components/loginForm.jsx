@@ -7,18 +7,30 @@ class LoginForm extends Component {
     errors: {},
   };
 
+  validateProperty = ({ name, value }) => {
+    if (name === "userName") {
+      if (value.trim() === "") return "Username is required!";
+    }
+    if (name === "password") {
+      if (value.trim() === "") return "Password is required!";
+    }
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate();
-    console.log(errors);
-    this.setState({ errors });
+    this.setState({ errors: errors || {} });
     if (errors) return;
   };
 
   handleInput = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
     const account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account });
+    this.setState({ account, errors });
   };
 
   validate = () => {
@@ -33,7 +45,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
@@ -44,6 +56,7 @@ class LoginForm extends Component {
             label="Username"
             onChange={this.handleInput}
             type="text"
+            error={errors.userName}
           />
 
           <Input
@@ -52,6 +65,7 @@ class LoginForm extends Component {
             label="Password"
             onChange={this.handleInput}
             type="password"
+            error={errors.password}
           />
 
           <button className="btn btn-primary mt-2">Login</button>
