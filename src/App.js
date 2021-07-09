@@ -10,6 +10,7 @@ import LoginForm from "./components/loginForm";
 import Register from "./components/registerForm";
 
 import "./index.css";
+import AddMovie from "./components/addMovie";
 
 function App() {
   return (
@@ -22,12 +23,13 @@ function App() {
         </h1>
         <Switch>
           <Route path="/movies/:id" component={MovieForm} />
-          <Route path="/movies" component={Movies}></Route>
-          <Route path="/customers" component={Customers}></Route>
-          <Route path="/rentals" component={Rentals}></Route>
-          <Route path="/notfound" component={NotFound}></Route>
+          <Route path="/movies" component={Movies} />
+          <Route path="/customers" component={Customers} />
+          <Route path="/rentals" component={Rentals} />
+          <Route path="/notfound" component={NotFound} />
           <Route path="/loginForm" component={LoginForm} />
           <Route path="/registerForm" component={Register} />
+          <Route path="/addMovie" component={AddMovie} />
           <Redirect from="/" exact to="/movies" />
           <Redirect to="/notfound" />
         </Switch>
