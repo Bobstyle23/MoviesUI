@@ -10,7 +10,6 @@ import LoginForm from "./components/loginForm";
 import Register from "./components/registerForm";
 
 import "./index.css";
-import AddMovie from "./components/addMovie";
 
 function App() {
   return (
@@ -29,7 +28,6 @@ function App() {
           <Route path="/notfound" component={NotFound} />
           <Route path="/loginForm" component={LoginForm} />
           <Route path="/registerForm" component={Register} />
-          <Route path="/addMovie" component={AddMovie} />
           <Redirect from="/" exact to="/movies" />
           <Redirect to="/notfound" />
         </Switch>
